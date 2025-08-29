@@ -11,6 +11,16 @@ A Python/Tkinter GUI application for downloading audio and video from YouTube vi
 - Queue management for batch downloads
 - Configurable output directory and audio quality
 
+## For End Users (Non-Technical)
+
+### Option 1: Download the Pre-built App (Easiest)
+1. Download `RedSea.app` from releases
+2. Drag `RedSea.app` to your Applications folder
+3. Install FFmpeg: Open Terminal and run `brew install ffmpeg`
+   - If you don't have Homebrew, install it first: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+4. Double-click RedSea.app to run
+
+## For Developers
 
 ### Building a Standalone App
 
@@ -82,3 +92,4 @@ python3 "RedSea - Mac.py"
 - Duplicate videos in the queue are automatically skipped
 
 - All features from the Windows version are supported on macOS
+
