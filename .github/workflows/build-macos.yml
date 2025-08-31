@@ -40,7 +40,7 @@ jobs:
         hdiutil create -volname "RedSea" -srcfolder dist/dmg -ov -format UDZO dist/RedSea.dmg
     
     - name: Upload app as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: RedSea-macOS
         path: |
@@ -58,3 +58,4 @@ jobs:
         prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
