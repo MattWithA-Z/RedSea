@@ -2,10 +2,33 @@
 
 block_cipher = None
 
+import os
+
+# Find FFmpeg binary
+ffmpeg_path = None
+ffmpeg_locations = [
+    '/opt/homebrew/bin/ffmpeg',
+    '/usr/local/bin/ffmpeg', 
+    '/usr/bin/ffmpeg'
+]
+
+for location in ffmpeg_locations:
+    if os.path.exists(location):
+        ffmpeg_path = location
+        break
+
+# Prepare binaries list
+binaries = []
+if ffmpeg_path:
+    binaries.append((ffmpeg_path, '.'))
+    print(f"Including FFmpeg from: {ffmpeg_path}")
+else:
+    print("WARNING: FFmpeg not found - app will require external FFmpeg installation")
+
 a = Analysis(
     ['RedSea - Mac.py'],
     pathex=[],
-    binaries=[],
+    binaries=binaries,
     datas=[
         ('logo.png', '.'),
     ],

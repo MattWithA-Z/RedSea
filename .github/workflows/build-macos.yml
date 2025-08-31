@@ -34,9 +34,27 @@ jobs:
         pip install -r requirements.txt
         pip install pyinstaller
     
+    - name: Verify FFmpeg installation
+      run: |
+        which ffmpeg
+        ffmpeg -version
+        ls -la /opt/homebrew/bin/ffmpeg
+    
     - name: Build macOS app
       run: |
         pyinstaller RedSea.spec
+    
+    - name: Verify FFmpeg bundled in app
+      run: |
+        if [ -f "dist/RedSea.app/Contents/MacOS/ffmpeg" ]; then
+          echo "✅ FFmpeg successfully bundled in app"
+          ls -la dist/RedSea.app/Contents/MacOS/ffmpeg
+        else
+          echo "❌ FFmpeg not found in app bundle"
+          echo "Contents of MacOS directory:"
+          ls -la dist/RedSea.app/Contents/MacOS/
+          exit 1
+        fi
     
     - name: Create DMG installer
       run: |
