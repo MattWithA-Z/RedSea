@@ -1,0 +1,61 @@
+name: Build RedSea for macOS
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install system dependencies
+      run: |
+        brew install ffmpeg
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+    
+    - name: Build macOS app
+      run: |
+        pyinstaller RedSea.spec
+    
+    - name: Create DMG installer
+      run: |
+        mkdir -p dist/dmg
+        cp -R dist/RedSea.app dist/dmg/
+        hdiutil create -volname "RedSea" -srcfolder dist/dmg -ov -format UDZO dist/RedSea.dmg
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: RedSea-macOS
+        path: |
+          dist/RedSea.app
+          dist/RedSea.dmg
+        retention-days: 30
+    
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          dist/RedSea.dmg
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
