@@ -83,3 +83,6 @@ get-pip.py
 
 # Logs
 *.log
+
+#claude
+claude.md
