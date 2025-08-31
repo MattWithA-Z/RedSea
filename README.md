@@ -1,6 +1,6 @@
 # RedSea for macOS - YouTube Audio/Video Downloader
 
-A self-contained macOS application for downloading audio and video from YouTube videos and playlists. Built with Python/Tkinter and distributed as a standard macOS .dmg installer.
+A Python/Tkinter GUI application for downloading audio and video from YouTube videos and playlists on macOS.
 
 ## Features
 
@@ -14,28 +14,20 @@ A self-contained macOS application for downloading audio and video from YouTube 
 ## Installation
 
 ### Download the Pre-built App (Recommended)
-1. Go to [Releases](https://github.com/MattWithA-Z/RedSea/releases) and download the latest `.dmg` file
+1. Go to [Releases](https://github.com/MattWithA-Z/RedSea/releases) and download the latest `RedSea-v1.0.2.dmg` file
 2. Double-click the downloaded `.dmg` file to mount it
 3. Drag `RedSea.app` to your Applications folder
 4. Eject the disk image
 5. Launch RedSea from Applications or Spotlight
 
-**That's it!** The app is completely self-contained with FFmpeg and all dependencies bundled - no additional software installation required.
+**That's it!** The app is completely self-contained with all dependencies bundled.
 
 ## For Developers
 
-### Building from Source
+### Building a Standalone App
 
-#### Option 1: Using PyInstaller Spec (Recommended)
-```bash
-# Install build dependencies
-pip3 install pyinstaller
+To create a `.app` bundle that includes all dependencies:
 
-# Build using spec file (automatically bundles FFmpeg)
-pyinstaller RedSea.spec
-```
-
-#### Option 2: Using Build Script
 ```bash
 # Install build dependencies
 pip3 install pyinstaller
@@ -44,13 +36,14 @@ pip3 install pyinstaller
 python3 build_mac.py
 ```
 
-Both methods create a self-contained `RedSea.app` in the `dist/` folder with FFmpeg bundled.
+This creates `RedSea.app` in the `dist/` folder that users can drag to Applications.
 
-### Development Setup
+### Manual Setup (Development)
 
-For developers who want to run from source:
+#### 1. Install FFmpeg
 
-#### 1. Install FFmpeg (Development Only)
+Install FFmpeg using Homebrew (recommended):
+
 ```bash
 # Install Homebrew if you don't have it
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -60,17 +53,17 @@ brew install ffmpeg
 ```
 
 #### 2. Install Python Dependencies
+
 ```bash
 # Install required Python packages
 pip3 install -r requirements.txt
 ```
 
-#### 3. Run from Source
+#### 3. Running the Application
+
 ```bash
 python3 "RedSea - Mac.py"
 ```
-
-**Note:** Development setup requires FFmpeg to be installed separately. The built app bundles FFmpeg automatically.
 
 ## Usage
 
@@ -78,7 +71,7 @@ python3 "RedSea - Mac.py"
 2. **Choose Format**: Select MP3 audio only, MP4 video only, or both formats  
 3. **Set Output Directory**: Browse to select where files should be saved
 4. **Configure Quality**: Choose audio quality (128-320 kbps for MP3)
-5. **Download**: Click "Download Queue" to start batch downloading
+5. **Download**: Click "Download Queue" to start downloading
 6. **Cancel**: Use the Cancel button to stop downloads at any time
 
 ## Troubleshooting
@@ -86,32 +79,11 @@ python3 "RedSea - Mac.py"
 ### App Issues
 - If downloads fail, try restarting the app
 - Check that you have a stable internet connection
-- Verify the output directory is writable
 
-### Development Issues
+### Python Dependencies
 - Make sure you're using Python 3.x: `python3 --version`
 - Install dependencies with pip3, not pip
-- Ensure FFmpeg is installed for development: `ffmpeg -version`
 
-### Build Issues
-- Verify FFmpeg is available during build process
-- Check that PyInstaller can find all dependencies
-- Ensure sufficient disk space for building
-
-## Technical Details
-
-- **Self-contained**: FFmpeg and all dependencies are bundled in the app
-- **Playlist support**: Automatically detects and processes YouTube playlists
-- **Duplicate handling**: Automatically skips duplicate videos in queue
-- **Cross-platform**: All features from the Windows version are supported
-- **CI/CD**: Automated builds via GitHub Actions create .dmg installers
-- **Architecture**: Built with Python/Tkinter, packaged with PyInstaller
-
-## Distribution
-
-- **Format**: Standard macOS .dmg installer
-- **Size**: ~100MB (includes FFmpeg binary)
-- **Compatibility**: macOS 10.14+ (Mojave and later)
-- **Installation**: Drag-and-drop to Applications folder
-- **Updates**: Download new .dmg releases from GitHub
-
+### Permission Issues
+- Make sure the output directory is writable
+- Check file permissions if downloads fail
