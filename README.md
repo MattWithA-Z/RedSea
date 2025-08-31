@@ -71,7 +71,7 @@ python3 "RedSea - Mac.py"
 2. **Choose Format**: Select MP3 audio only, MP4 video only, or both formats  
 3. **Set Output Directory**: Browse to select where files should be saved
 4. **Configure Quality**: Choose audio quality (128-320 kbps for MP3)
-5. **Download**: Click "Download Queue" to start batch downloading
+5. **Download**: Click "Download Queue" to start downloading
 6. **Cancel**: Use the Cancel button to stop downloads at any time
 
 ## Troubleshooting
@@ -87,11 +87,3 @@ python3 "RedSea - Mac.py"
 ### Permission Issues
 - Make sure the output directory is writable
 - Check file permissions if downloads fail
-
-## Notes
-
-- The app automatically detects playlist URLs and extracts all videos
-- Duplicate videos in the queue are automatically skipped
-
-- All features from the Windows version are supported on macOS
-
